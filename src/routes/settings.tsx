@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, type ReactNode } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { AppShell } from "@/components/AppShell";
 import {
   Languages,
@@ -40,6 +40,21 @@ function SettingsPage() {
   });
   const set = (k: keyof typeof toggles) => () => setToggles((t) => ({ ...t, [k]: !t[k] }));
 
+  const [downloadedCount, setDownloadedCount] = useState<number>(2);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("offline_translation_packs");
+    if (saved) {
+      try {
+        const packs = JSON.parse(saved);
+        const count = packs.filter((p: any) => p.status === "downloaded").length;
+        setDownloadedCount(count);
+      } catch (e) {
+        // ignore
+      }
+    }
+  }, []);
+
   const sections: {
     title: string;
     icon: typeof Languages;
@@ -74,7 +89,18 @@ function SettingsPage() {
       title: "Offline Languages",
       icon: Download,
       rows: [
-        { label: "Manage downloads", right: <ChevronRight className="h-4 w-4 text-muted-foreground" />, to: "/offline" },
+        {
+          label: "Manage downloads",
+          right: (
+            <div className="flex items-center gap-1.5">
+              <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-bold text-primary">
+                {downloadedCount} ready
+              </span>
+              <ChevronRight className="h-4 w-4 text-muted-foreground" />
+            </div>
+          ),
+          to: "/offline",
+        },
       ],
     },
     {
