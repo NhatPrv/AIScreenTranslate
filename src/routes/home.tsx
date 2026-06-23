@@ -77,8 +77,8 @@ function Home() {
             </button>
             <div className="min-w-0 text-right">
               <div className="flex items-center justify-end gap-2 text-white">
-                <span className="truncate text-lg font-bold">Vietnamese</span>
-                <span className="text-2xl">🇻🇳</span>
+                <span className="truncate text-lg font-bold">English (US)</span>
+                <span className="text-2xl">🇺🇸</span>
               </div>
             </div>
           </div>

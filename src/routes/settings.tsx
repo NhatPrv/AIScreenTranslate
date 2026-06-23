@@ -64,7 +64,7 @@ function SettingsPage() {
       title: "Translation",
       icon: Languages,
       rows: [
-        { label: "Target language", right: <span className="text-muted-foreground">Vietnamese</span>, to: "/languages" },
+        { label: "Target language", right: <span className="text-muted-foreground">English (US)</span>, to: "/languages" },
         { label: "Auto-translate", right: <Switch on={toggles.autoTranslate} onChange={set("autoTranslate")} /> },
         { label: "Sound effects", right: <Switch on={toggles.sound} onChange={set("sound")} /> },
       ],

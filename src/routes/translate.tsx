@@ -9,7 +9,7 @@ export const Route = createFileRoute("/translate")({
 });
 
 function Translate() {
-  const [isViDownloaded, setIsViDownloaded] = useState<boolean>(true);
+  const [isEnDownloaded, setIsEnDownloaded] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -17,8 +17,8 @@ function Translate() {
     if (saved) {
       try {
         const packs = JSON.parse(saved);
-        const viPack = packs.find((p: any) => p.code === "vi");
-        setIsViDownloaded(viPack ? viPack.status === "downloaded" : false);
+        const enPack = packs.find((p: any) => p.code === "en");
+        setIsEnDownloaded(enPack ? enPack.status === "downloaded" : false);
       } catch (e) {
         // ignore
       }
@@ -53,7 +53,7 @@ function Translate() {
           <div className="absolute inset-x-4 top-40 z-20 flex h-64 items-center justify-center rounded-3xl bg-card/95 shadow-elevated backdrop-blur-2xl">
             <span className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
           </div>
-        ) : !isViDownloaded ? (
+        ) : !isEnDownloaded ? (
           /* Missing language warning */
           <div className="absolute inset-x-4 top-40 z-20 overflow-hidden rounded-3xl border border-white/10 bg-card/95 p-6 shadow-elevated backdrop-blur-2xl text-center">
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-500 mb-4 animate-pulse">
@@ -61,7 +61,7 @@ function Translate() {
             </div>
             <h2 className="text-lg font-bold text-foreground">Offline Pack Required</h2>
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-              The target translation pack (Vietnamese) is not downloaded. Please download it in Settings to translate offline.
+              The target translation pack (English (US)) is not downloaded. Please download it in Settings to translate offline.
             </p>
             <div className="mt-6 flex flex-col gap-2">
               <Link
@@ -101,9 +101,9 @@ function Translate() {
             </div>
 
             <div className="p-5">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Original · English</div>
+              <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Original · Vietnamese</div>
               <p className="mt-1.5 text-base font-medium leading-snug text-foreground">
-                The hero gains a new ability after defeating the ancient dragon.
+                Người hùng nhận được sức mạnh mới sau khi đánh bại con rồng cổ đại.
               </p>
 
               <div className="my-4 flex items-center gap-3">
@@ -114,9 +114,9 @@ function Translate() {
                 <div className="h-px flex-1 bg-border" />
               </div>
 
-              <div className="text-[10px] font-bold uppercase tracking-widest text-primary">Translation · Vietnamese</div>
+              <div className="text-[10px] font-bold uppercase tracking-widest text-primary">Translation · English (US)</div>
               <p className="mt-1.5 text-lg font-semibold leading-snug text-foreground">
-                Người hùng nhận được sức mạnh mới sau khi đánh bại con rồng cổ đại.
+                The hero gains a new ability after defeating the ancient dragon.
               </p>
 
               <div className="mt-5 grid grid-cols-3 gap-2">
